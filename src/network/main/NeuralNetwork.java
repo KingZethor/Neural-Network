@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 public class NeuralNetwork {
+	private bool isCountingpUp = false;
+	private int learningTracker;
 	private int[] layers;
 	private BigDecimal learningRate;
 	private NeuronLayer[] neuronLayer;
@@ -12,12 +14,18 @@ public class NeuralNetwork {
 	public NeuralNetwork(int[] layers, BigDecimal learningRate){
 		this.layers =  new int[layers.length];
 		this.learningRate = learningRate;
+		if(learningRate > 30) isCountingUp = true;
 		for(int i = 0; i < layers.length; i++){
 			this.layers[i] = layers[i];
 		}
 		
 		r = new Random();
 		initLayer();
+		if(isCountingUp){
+			isCountingUp = false;
+			r = new Random();
+			this.learningTracker++;
+		}
 	}
 	
 	private void initLayer(){
